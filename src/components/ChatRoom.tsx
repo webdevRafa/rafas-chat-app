@@ -48,6 +48,7 @@ export const ChatRoom = () => {
   return (
     <>
       {/* Chat Room Container */}
+      <h1 className="text-red text-4xl font-mono">WELCOME</h1>
       <div
         className="mx-auto mt-20 p-5 relative max-w-[100%] md:max-w-[1200px] max-h-[450px] overflow-y-scroll bg-gradient-to-t from-black to-dark"
         style={{ scrollBehavior: "smooth" }}
@@ -86,7 +87,6 @@ export const ChatRoom = () => {
           <div ref={bottomRef} />
         </div>
       </div>
-
       {/* form to send new messages */}
       <div className="mt-10">
         <form onSubmit={sendMessage}>
