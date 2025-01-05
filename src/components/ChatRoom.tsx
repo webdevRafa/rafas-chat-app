@@ -57,22 +57,29 @@ export const ChatRoom = () => {
           {messages?.map((msg, index) => (
             <div key={index} className="flex mb-5 gap-2 items-start">
               {/* username and photoURL */}
-              <div>
-                <p className="text-red"> {msg.userName}</p>
-                <img className="size-10" src={msg.photoURL} alt="" />
+              <div className="min-w-[100px]">
+                <div className="flex justify-start items-start flex-col">
+                  <p className="text-red text-sm"> {msg.userName}</p>
+                  <img className="size-10" src={msg.photoURL} alt="" />
+                </div>
               </div>
 
               {/* messages */}
               <div key={index}>
-                <p key={index} className="text-white text-1xl">
-                  {msg.text}
-                </p>
-                <p key={index} className="text-off-white text-sm">
-                  {msg.createdAt
-                    ? new Date(msg.createdAt.seconds * 1000).toLocaleString() // Convert and format timestamp
-                    : "Just now"}{" "}
-                  {/* Fallback for missing timestamp */}
-                </p>
+                <div className="flex items-start flex-col justify-start">
+                  <p
+                    key={index}
+                    className="text-white text-md font-bold font-mono"
+                  >
+                    {msg.text}
+                  </p>
+                  <p key={index} className="text-off-white text-sm">
+                    {msg.createdAt
+                      ? new Date(msg.createdAt.seconds * 1000).toLocaleString() // Convert and format timestamp
+                      : "Just now"}{" "}
+                    {/* Fallback for missing timestamp */}
+                  </p>
+                </div>
               </div>
             </div>
           ))}
