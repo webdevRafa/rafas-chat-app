@@ -49,42 +49,48 @@ export const ChatRoom = () => {
     <>
       {/* Chat Room Container */}
       <div
-        className="mt-20 py-[50px] relative max-h-[300px] overflow-y-scroll"
+        className="mx-auto mt-20 p-5 relative max-w-[100%] md:max-w-[1200px] max-h-[450px] overflow-y-scroll bg-gradient-to-t from-black to-dark"
         style={{ scrollBehavior: "smooth" }}
       >
-        {/* render existing messages */}
-        {messages?.map((msg, index) => (
-          <div key={index} className="flex mb-5 gap-2 items-center">
-            <div>
-              <p> {msg.userName}</p>
-              <img className="size-10" src={msg.photoURL} alt="" />
+        <div className="mx-auto w-full">
+          {/* render existing messages */}
+          {messages?.map((msg, index) => (
+            <div key={index} className="flex mb-5 gap-2 items-start">
+              {/* username and photoURL */}
+              <div>
+                <p className="text-red"> {msg.userName}</p>
+                <img className="size-10" src={msg.photoURL} alt="" />
+              </div>
+
+              {/* messages */}
+              <div key={index}>
+                <p key={index} className="text-white text-1xl">
+                  {msg.text}
+                </p>
+                <p key={index} className="text-off-white text-sm">
+                  {msg.createdAt
+                    ? new Date(msg.createdAt.seconds * 1000).toLocaleString() // Convert and format timestamp
+                    : "Just now"}{" "}
+                  {/* Fallback for missing timestamp */}
+                </p>
+              </div>
             </div>
-            <div key={index}>
-              <p key={index} className="text-black text-1xl">
-                {msg.text}
-              </p>
-              <p key={index} className="text-off-white text-sm">
-                {msg.createdAt
-                  ? new Date(msg.createdAt.seconds * 1000).toLocaleString() // Convert and format timestamp
-                  : "Just now"}{" "}
-                {/* Fallback for missing timestamp */}
-              </p>
-            </div>
-          </div>
-        ))}
-        <div ref={bottomRef} />
+          ))}
+          <div ref={bottomRef} />
+        </div>
       </div>
 
       {/* form to send new messages */}
-      <div>
+      <div className="mt-10">
         <form onSubmit={sendMessage}>
           <input
             type="text"
+            className="w-[80%] mr-5"
             placeholder="Type a message..."
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
           />
-          <button className="bg-black text-white px-2" type="submit">
+          <button className="bg-red text-white px-2" type="submit">
             Send
           </button>
         </form>

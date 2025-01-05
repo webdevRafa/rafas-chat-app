@@ -7,9 +7,11 @@ export default {
   theme: {
     extend: {},
     colors: {
-      'black': "#171717",
+      'dark': '#000000',
+      'black': "#161616",
       'white': "#FFFFFF",
-      'off-white': "#B7B6B6"
+      'off-white': "#B7B6B6",
+      'red': '#8a0000'
     },
   },
   plugins: [],
