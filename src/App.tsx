@@ -1,13 +1,24 @@
 import "./App.css";
+import { ChatRoom } from "./components/ChatRoom";
+import { Login } from "./components/Login";
+import { auth } from "./firebase";
+import { useState, useEffect } from "react";
+import { User } from "firebase/auth"; // Import user type from Firebase
 
 function App() {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    // Listen for auth state changes
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser); // Set the user if authenticated, otherwise null
+    });
+
+    return () => unsubscribe(); // Cleanup the listener on component unmount
+  }, []);
   return (
     <>
-      <h1 className="text-3xl">HELLO WORLD</h1>
-      <p>my name is rafatanga</p>
-      <button onClick={() => alert(import.meta.env.VITE_FIREBASE_API_KEY)}>
-        CLICK ME
-      </button>
+      <div>{user ? <ChatRoom /> : <Login />}</div>
     </>
   );
 }
